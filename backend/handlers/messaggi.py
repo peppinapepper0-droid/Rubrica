@@ -18,7 +18,7 @@ class TasksHandler(BaseHandler):
                 "id": str(t["_id"]),
                 "autore": str(t["autore"]),
                 "text": t["text"],
-                "data": t["data"]
+                "data": str(t["data"])
             })
 
         return self.write_json({"items": bacheca})

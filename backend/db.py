@@ -1,7 +1,7 @@
 from pymongo import AsyncMongoClient
 
-MONGO_URL = "rubricas://localhost:27017"
-DB_NAME = "rubrica"
+MONGO_URL = "mongodb://localhost:27017"
+DB_NAME = "Bacheca"
 COOKIE_SECRET = "super_secret_key_change_me"
 PORT = 8888
 
