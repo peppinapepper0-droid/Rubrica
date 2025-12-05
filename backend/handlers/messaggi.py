@@ -30,6 +30,7 @@ class TasksHandler(BaseHandler):
 
         body = tornado.escape.json_decode(self.request.body)
         text = body.get("text", "").strip()
+        autore=body.get("autore", "").strip()
 
         if not text:
             return self.write_json({"error": "Testo obbligatorio"}, 400)
@@ -37,7 +38,7 @@ class TasksHandler(BaseHandler):
         result = await messaggi.insert_one({
             "user_id": ObjectId(user["id"]),
             "text": text,
-            "done": False,
+            "autore": autore,
             "data":datetime.datetime.now()
         })
 
