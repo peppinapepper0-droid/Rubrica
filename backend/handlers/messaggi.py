@@ -37,10 +37,11 @@ class TasksHandler(BaseHandler):
             return self.write_json({"error": "Testo obbligatorio"}, 400)
 
         result = await messaggi.insert_one({
-            "user_id": ObjectId(user["id"]),
+            "user_id": user["id"],
+            "autore": user["email"],
             "text": text,
-            "autore": autore,
-            "data":datetime.datetime.now()
+            "data": datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+            "done": False
         })
 
         return self.write_json({"id": str(result.inserted_id)}, 201)
