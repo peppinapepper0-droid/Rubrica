@@ -56,7 +56,7 @@ class TaskDeleteHandler(BaseHandler):
 
         await messaggi.delete_one({
             "_id": ObjectId(task_id),
-            "user_id": ObjectId(user["id"])
+            "user_id":user["id"]
         })
 
         return self.write_json({"message": "Eliminato"})
