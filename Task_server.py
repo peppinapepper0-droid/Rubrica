@@ -10,17 +10,17 @@ from backend.handlers.messaggi import TasksHandler, TaskUpdateHandler, TaskDelet
 def make_app():
     return tornado.web.Application(
         [
-            (r"/api/register", RegisterHandler),
-            (r"/api/login", LoginHandler),
-            (r"/api/logout", LogoutHandler),
+            (r"/api/register", RegisterHandler),  # per registrazione
+            (r"/api/login", LoginHandler),  # per login (accesso)
+            (r"/api/logout", LogoutHandler),  # per logout
 
-            (r"/api/messaggi", TasksHandler),
-            (r"/api/messaggi/([a-f0-9]{24})", TaskUpdateHandler),
-            (r"/api/messaggi/([a-f0-9]{24})/delete", TaskDeleteHandler),
+            (r"/api/tasks", TasksHandler),  # avere/creare nuovo messaggio
+            (r"/api/tasks/([a-f0-9]{24})/delete", TaskDeleteHandler),  # eliminare msg in base a ID
 
             (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": "static"}),
 
             (r"/", tornado.web.RedirectHandler, {"url": "/static/login.html"}),
+            # quando url è "/", utente viene reinderizzato alla pagina di login
         ],
         cookie_secret=COOKIE_SECRET,
         autoreload=True,
