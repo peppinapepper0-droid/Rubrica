@@ -13,15 +13,17 @@ class TasksHandler(BaseHandler):
 
         cursor = messaggi.find({"user_id": ObjectId(user["id"])})
         bacheca = []
-        async for t in cursor:
+        async for messaggio in cursor:
             bacheca.append({
-                "id": str(t["_id"]),
-                "autore": str(t["autore"]),
-                "text": t["text"],
-                "data": str(t["data"])
+                "id": str(messaggio["_id"]),
+                "autore": messaggio["autore"],
+                "text": messaggio["text"],
+                "data": messaggio["data"],
+                "done": messaggio["done"],
+                "cestino": str(messaggio["user_id"])
             })
 
-        return self.write_json({"items": bacheca})
+        return self.write_json({"creatore":user["id"],"items": bacheca})
 
     async def post(self):
         user = self.get_current_user()
@@ -30,7 +32,6 @@ class TasksHandler(BaseHandler):
 
         body = tornado.escape.json_decode(self.request.body)
         text = body.get("text", "").strip()
-        autore=body.get("autore", "").strip()
 
         if not text:
             return self.write_json({"error": "Testo obbligatorio"}, 400)
