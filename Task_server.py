@@ -4,7 +4,7 @@ import tornado.escape
 
 from backend.db import COOKIE_SECRET, PORT
 from backend.handlers.mail_psw import RegisterHandler, LoginHandler, LogoutHandler
-from backend.handlers.messaggi import TasksHandler, TaskUpdateHandler, TaskDeleteHandler
+from backend.handlers.messaggi import TasksHandler,  TaskDeleteHandler
 
 
 def make_app():

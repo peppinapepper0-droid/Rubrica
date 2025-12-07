@@ -11,7 +11,7 @@ class TasksHandler(BaseHandler):
         if not user:
             return self.write_json({"error": "Non autenticato"}, 401)
 
-        cursor = messaggi.find({"user_id": ObjectId(user["id"])})
+        cursor = messaggi.find()
         bacheca = []
         async for messaggio in cursor:
             bacheca.append({
@@ -46,22 +46,6 @@ class TasksHandler(BaseHandler):
 
         return self.write_json({"id": str(result.inserted_id)}, 201)
 
-
-class TaskUpdateHandler(BaseHandler):
-    async def put(self, task_id):
-        user = self.get_current_user()
-        if not user:
-            return self.write_json({"error": "Non autenticato"}, 401)
-
-        body = tornado.escape.json_decode(self.request.body)
-        done = body.get("done")
-
-        await messaggi.update_one(
-            {"_id": ObjectId(task_id), "user_id": ObjectId(user["id"])},
-            {"$set": {"done": bool(done)}}
-        )
-
-        return self.write_json({"message": "Aggiornato"})
 
 
 class TaskDeleteHandler(BaseHandler):

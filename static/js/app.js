@@ -75,15 +75,6 @@ async function addTask() {
     loadTasks();
 }
 
-async function updateTask(id, done) {
-    await fetch(`/api/tasks/${id}`, {
-        method: "PUT",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({done})
-    });
-
-    loadTasks();
-}
 
 
 async function deleteTask(id) {
