@@ -11,7 +11,7 @@ def make_app():
     return tornado.web.Application(
         [
             (r"/api/register", RegisterHandler),  # per registrazione
-            (r"/api/login", LoginHandler),  # per login (accesso)
+            (r"/api/login", LoginHandler),  # per login
             (r"/api/logout", LogoutHandler),  # per logout
 
             (r"/api/tasks", TasksHandler),  # avere/creare nuovo messaggio
